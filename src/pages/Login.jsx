@@ -28,7 +28,7 @@ const Login = () => {
         </div> 
         <button type='button' className='btn btn-secondary btn-block '>Guest user</button>
           <p className="text-center">not a member? 
-          <Link to="register" className='ml-2 link link-hover link-primary capitalize'>
+          <Link to="/register" className='ml-2 link link-hover link-primary capitalize'>
             Register
           </Link>
           
