@@ -1,11 +1,22 @@
 import React from 'react'
-import { Hero } from '../components/index'
+import { FeaturedProduct, Hero } from '../components/index'
+import { customFetch } from '../utils'
+import { useLoaderData } from 'react-router-dom'
+
+const url = '/products?featured=true'
+
+export const loader = async() => {
+  const {data} = await customFetch.get(url)
+  
+  return {products: data.data}
+}
 
 
 const Landing = () => {
   return (
     <>
-    <Hero />
+    <Hero/>
+    <FeaturedProduct />
     </>
   )
 }
