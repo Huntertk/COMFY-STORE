@@ -1,4 +1,5 @@
 import React from 'react'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { 
   About, 
   Cart, 
@@ -13,9 +14,58 @@ import {
   Register
 } from './pages/index'
 
+
+const router = createBrowserRouter([
+  {
+    path:"/",
+    element: <HomeLayout />,
+    errorElement: <Error />,
+    children:[
+      {
+        index: true,
+        element:<Landing />
+      },
+      {
+        path: "products",
+        element:<Products />
+      },
+      {
+        path: "products/:id",
+        element:<SingleProduct />
+      },
+      {
+        path: "cart",
+        element:<Cart />
+      },
+      {
+        path: "about",
+        element:<About />
+      },
+      {
+        path: "checkout",
+        element:<Checkout />
+      },
+      {
+        path: "orders",
+        element:<Orders />
+      },
+    ]
+  },
+  {
+    path:"/login",
+    element: <Login />,
+    errorElement: <Error />
+  },
+  {
+    path:"/register",
+    element: <Register />,
+    errorElement: <Error />
+  }
+])
+
 const App = () => {
   return (
-    <h1 className='text-white bg-slate-950'>App</h1>
+      <RouterProvider router={router} />
   )
 }
 
