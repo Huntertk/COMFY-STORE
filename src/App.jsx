@@ -14,10 +14,16 @@ import {
   Register
 } from './pages/index'
 import { ErrorElement } from './components/index'
+
+/*Loaders */
 import { loader as landingLoader } from './pages/Landing'
 import { loader as singleProductLoader } from './pages/SingleProduct'
 import { loader as productsLoader } from './pages/Products'
 
+/*Actions */
+import {action as registerAction} from './pages/Register'
+import {action as loginAction} from './pages/Login'
+import {store} from './store'
 
 const router = createBrowserRouter([
   {
@@ -64,12 +70,14 @@ const router = createBrowserRouter([
   {
     path:"/login",
     element: <Login />,
+    action: loginAction(store),
     errorElement: <Error />
   },
   {
     path:"/register",
     element: <Register />,
-    errorElement: <Error />
+    errorElement: <Error />,
+    action: registerAction
   }
 ])
 

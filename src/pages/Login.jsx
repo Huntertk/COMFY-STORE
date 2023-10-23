@@ -1,6 +1,28 @@
 import React from 'react'
 import { FormInput, SubmitBtn } from '../components/index'
-import { Form, Link } from 'react-router-dom'
+import { Form, Link, redirect, useNavigate } from 'react-router-dom'
+import { customFetch } from '../utils'
+import { toast } from 'react-toastify'
+import { loginUser } from '../features/user/userSlice'
+import { useDispatch } from 'react-redux'
+
+
+export const action = (store) => async ({request}) => {
+
+  const formData = await request.formData()
+  const data = Object.fromEntries(formData)
+  try {
+    const res = await customFetch.post('/auth/local', data)
+    store.dispatch(loginUser(res.data))
+    toast.success("User login successfully")
+    return redirect("/")
+    // return null
+  } catch (error) {
+    console.log(error);
+    toast.error("Something went wrong")
+    return null
+  } 
+}
 
 
 const Login = () => {
@@ -26,7 +48,7 @@ const Login = () => {
           <SubmitBtn text={"Login"} />
           
         </div> 
-        <button type='button' className='btn btn-secondary btn-block '>Guest user</button>
+        {/* <button type='button' className='btn btn-secondary btn-block '>Guest user</button> */}
           <p className="text-center">not a member? 
           <Link to="/register" className='ml-2 link link-hover link-primary capitalize'>
             Register
